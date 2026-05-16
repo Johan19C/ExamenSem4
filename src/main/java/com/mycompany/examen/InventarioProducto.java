@@ -29,7 +29,7 @@ public class InventarioProducto {
             System.out.println("4. Ordenar por nombre");
             System.out.println("5. Ordenar por precio");
             System.out.println("6. Ordenar por stock");
-            System.out.println("7. Suma total de productos");
+            System.out.println("7. Suma total de stock");
             System.out.println("8. Mostrar Arbol");
             System.out.println("9. Guardar archivo");
             System.out.println("10. Ver Historial");
@@ -39,90 +39,89 @@ public class InventarioProducto {
             scanner.nextLine();
 
             switch (opcion) {
+
                 case 1:
-                    System.out.println("Ingrese codigo: ");
+                    System.out.print("Codigo: ");
                     String codigo = scanner.nextLine();
 
-                    System.out.println("Ingrese Nombre: ");
+                    System.out.print("Nombre: ");
                     String nombre = scanner.nextLine();
 
-                    System.out.println("Ingrese Categoria: ");
+                    System.out.print("Categoria: ");
                     String categoria = scanner.nextLine();
 
-                    System.out.println("Ingrese precio: ");
+                    System.out.print("Precio: ");
                     double precio = scanner.nextDouble();
 
-                    System.out.println("Ingrese Stock: ");
+                    System.out.print("Stock: ");
                     int stock = scanner.nextInt();
+                    scanner.nextLine();
 
-                    if (nombre.isEmpty()) {
-                        System.out.println("Ingresar nombre");
-                        break;
-                    }
-                    if (precio <= 0) {
-                        System.out.println("precio no valido ");
+                    if (nombre.isEmpty() || precio <= 0 || stock < 0) {
+                        System.out.println("Datos inválidos");
                         break;
                     }
 
-                    if (stock < 0) {
-                        System.out.println("Stock no valido");
-                        break;
-                    }
                     Producto p = new Producto(codigo, nombre, categoria, precio, stock);
 
                     if (gp.registrarProducto(p)) {
-                        System.out.println("Producto Registrado");
-
+                        System.out.println("Producto registrado");
                     } else {
-                        System.out.println("Codigo repetido");
+                        System.out.println("Código repetido");
                     }
                     break;
-                case 2:
 
-                    System.out.println("Ingrese el codigo: ");
+                case 2:
+                    System.out.print("Codigo: ");
                     String cod = scanner.nextLine();
 
                     Producto encontrado = gp.buscarProducto(cod);
 
-                    if (encontrado != null) {
-                        System.out.println(encontrado);
-                    } else {
-                        System.out.println("No se encontro");
-                    }
+                    System.out.println(encontrado != null ? encontrado : "No encontrado");
                     break;
+
                 case 3:
                     gp.mostrarProductos();
                     break;
+
                 case 4:
                     gp.ordenarPorNombre();
                     break;
+
                 case 5:
                     gp.ordenarPorPrecio();
                     break;
+
                 case 6:
                     gp.ordenarPorStock();
                     break;
+
                 case 7:
-                    System.out.println("Total Suma del Stock: " + gp.sumaStock(0));
+                    System.out.println("Stock total: " + gp.sumaStock(0));
                     break;
+
                 case 8:
                     gp.arbol.mostrarOrden();
                     break;
                 case 9:
                     gp.guardarArchivo();
                     break;
+
                 case 10:
                     gp.mostrarHistorial();
                     break;
+
                 case 11:
-                    System.out.println("Saliendo");
+                    System.out.println("Saliendo...");
                     break;
+
                 default:
-                    System.out.println("Opcion Invalida");
+                    System.out.println("Opción inválida");
             }
 
-        } while (opcion != 0);
+        } while (opcion != 11);
 
+        scanner.close();
     }
 
 }

@@ -57,7 +57,9 @@ public class Producto {
     }
 
     public void setPrecio(double precio) {
-        this.precio = precio;
+        if (precio > 0) {
+            this.precio = precio;
+        }
     }
 
     public int getStock() {
@@ -65,12 +67,14 @@ public class Producto {
     }
 
     public void setStock(int stock) {
-        this.stock = stock;
+        if (stock >= 0) {
+            this.stock = stock;
+        }
     }
 
     @Override
     public String toString() {
-        return codigo + " | " + nombre + " | " + categoria + " | " + precio + " | Stock" + stock ;
+        return codigo + " | " + nombre + " | " + categoria + " | " + precio + " | Stock: " + stock;
     }
 
 }

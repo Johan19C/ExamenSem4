@@ -17,8 +17,8 @@ public class Nodo {
 
     public Nodo(Producto producto) {
         this.producto = producto;
+        this.izquierda = null;
+        this.derecha = null;
     }
 
-    
-    
 }
